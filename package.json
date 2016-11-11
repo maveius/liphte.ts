@@ -2,7 +2,7 @@
   "name": "liphte.ts",
   "version": "1.0.0",
   "description": "It's library for building HTML / HTML5 from TypeScript or JavaScript",
-  "main": "dist/tag.js",
+  "main": "dist/liphte.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,10 @@
     "LiphteTS",
     "LiphteJS"
   ],
-  "author": "Michael Ligus",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maveius/liphte.ts.git"
+  },
+  "author": "maveius",
   "license": "MIT"
 }
