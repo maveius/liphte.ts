@@ -1,0 +1,22 @@
+{
+  "name": "liphte.ts",
+  "version": "1.0.0",
+  "description": "It's library for building HTML / HTML5 from TypeScript or JavaScript",
+  "main": "dist/tag.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "HTML5",
+    "HTML",
+    "TypeScript",
+    "JAML",
+    "HAML",
+    "Breve",
+    "Liphte",
+    "LiphteTS",
+    "LiphteJS"
+  ],
+  "author": "Michael Ligus",
+  "license": "MIT"
+}

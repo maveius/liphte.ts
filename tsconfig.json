@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "target": "es5",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "declaration": true,
+    "removeComments": true,
+    "outDir": "dist/",
+    "outFile": "dist/liphte.js"
+  },
+  "exclude": [
+    "src/example"
+  ]
+}
