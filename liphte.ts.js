@@ -4,5 +4,5 @@ var includeInThisContext = function(path) {
     var code = fs.readFileSync(path);
     vm.runInThisContext(code, path);
 }.bind(this);
-includeInThisContext("dist/liphte.min.js");
+includeInThisContext(__dirname+"/dist/liphte.min.js");
 exports.liphte = liphte;
