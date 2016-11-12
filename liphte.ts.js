@@ -6,4 +6,4 @@ var includeInThisContext = function(path) {
 }.bind(this);
 includeInThisContext(__dirname+"/dist/liphte.min.js");
 exports.liphte = liphte;
-exports.liphte.tag = liphte.tag;
+exports.tag = liphte.tag;
