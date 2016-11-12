@@ -2,7 +2,7 @@
   "name": "liphte.ts",
   "version": "1.0.1",
   "description": "It's library for building HTML / HTML5 from TypeScript or JavaScript",
-  "main": "dist/liphte.min.js",
+  "main": "liphte.ts.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
