@@ -67,4 +67,4 @@ wget https://github.com/maveius/liphte.ts/archive/master.zip
 - MIT
 
 ## Home Page
-- in progress
+https://maveius.pl/liphte.ts/
