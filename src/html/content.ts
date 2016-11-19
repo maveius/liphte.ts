@@ -1,31 +1,21 @@
+///<reference path="../utils/utils.ts"/>
+///<reference path="../strategy/renderStrategy.ts"/>
+///<reference path="../strategy/renderContext.ts"/>
+///<reference path="../factory/contentStrategyFactory.ts"/>
+
 module html {
-    export class Content {
 
-        private static instance: Content = new Content();
+    import Strings = utils.Strings;
+    import TagUtils = utils.TagUtils;
+    import ExtractorContext = strategy.ExtractorContext;
+    import ContentStrategyFactory = factory.ContentStrategyFactory;
 
-        private attributes = Attributes.getInstance();
+    export class Content extends Renderable {
 
-        constructor() {
-            if (Content.instance) {
-                throw new Error("Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.");
-            }
+        public render() : string {
 
-            Content.instance = this;
-        }
-
-        public render(attributesAndContent: any) {
-            let result = '';
-
-            for (let key of attributesAndContent) {
-                if (this.attributes.isString(key)) {
-                    result += key;
-                }
-            }
-            return result;
-        }
-
-        public static getInstance(): Content {
-            return Content.instance;
+            let strategy = ContentStrategyFactory.selectStrategy(this.key);
+            return this.execute(strategy);
         }
     }
 }

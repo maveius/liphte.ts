@@ -1,37 +1,114 @@
-declare module html {
-    class Attributes {
-        private static instance;
-        constructor();
-        render(attributesAndContent: any): string;
-        private isJSON(key);
-        isString(key: any): boolean;
-        private extract(key);
-        private parse(value);
-        static getInstance(): Attributes;
+declare module utils {
+    class Arrays {
+        static contains(array: any[], object: any): boolean;
+        static identity: <Y>(type: new () => Y) => string;
+        static isArray<T>(instance: any): boolean;
+        private static checkElements<T>(instance);
+    }
+    class JSONs {
+        static isJSON(object: any): boolean;
+        static isSimple(object: any): boolean;
+        static isComplex(object: any): boolean;
+    }
+    class Strings {
+        static EMPTY: string;
+        static isString(object: any): boolean;
+    }
+    class TagUtils {
+        private static counter;
+        static isAttribute(object: any): boolean;
+        static isContent(object: any): boolean;
+    }
+}
+declare module strategy {
+    abstract class RenderStrategy {
+        protected factory: any;
+        protected strategy: any;
+        abstract extract(key: any): string;
+        protected selectFactory(factory: any): void;
+        protected appendExtractedElement(element: any, results: any): void;
+    }
+}
+declare module strategy {
+    class ExtractorContext {
+        private strategy;
+        constructor(strategy: RenderStrategy);
+        execute(key: any): string;
     }
 }
 declare module html {
-    class Content {
-        private static instance;
-        private attributes;
+    import ExtractorStrategy = strategy.RenderStrategy;
+    abstract class Renderable {
+        protected key: any;
+        constructor(key: any);
+        abstract render(): string;
+        protected execute(strategy: ExtractorStrategy): string;
+    }
+}
+declare module strategy {
+    class SimpleAttributeRenderStrategy extends RenderStrategy {
+        extract(key: any): string;
+        private parse(value);
+    }
+}
+declare module strategy {
+    class ComplexAttributeRenderStrategy extends RenderStrategy {
         constructor();
-        render(attributesAndContent: any): string;
-        static getInstance(): Content;
+        extract(keys: any): string;
+    }
+}
+declare module factory {
+    import ExtractorStrategy = strategy.RenderStrategy;
+    class AttributeStrategyFactory {
+        static selectStrategy(key: any): ExtractorStrategy;
+    }
+}
+declare module html {
+    class Attribute extends Renderable {
+        constructor(key: any);
+        render(): string;
+    }
+}
+declare module strategy {
+    class ComplexContentRenderStrategy extends RenderStrategy {
+        constructor();
+        extract(keys: any): string;
+    }
+}
+declare module strategy {
+    class SimpleContentRenderStrategy extends RenderStrategy {
+        extract(key: any): string;
+    }
+}
+declare module factory {
+    import ExtractorStrategy = strategy.RenderStrategy;
+    class ContentStrategyFactory {
+        static selectStrategy(key: any): ExtractorStrategy;
+    }
+}
+declare module html {
+    class Content extends Renderable {
+        render(): string;
+    }
+}
+declare module factory {
+    import Renderable = html.Renderable;
+    class RenderableFactory {
+        static createAttribute(key: any): Renderable;
+        static createContent(key: any): Renderable;
     }
 }
 declare module builder {
-    import Attributes = html.Attributes;
-    import Content = html.Content;
     abstract class TagBuilder {
-        protected attributes: Attributes;
-        protected content: Content;
         abstract build(name: string, attributesAndContent: any): string;
+        protected buildAttributes(attributesAndContent: any): string;
+        protected buildContent(attributesAndContent: any): string;
         protected open(name: string): string;
         protected abstract close(name: string): string;
     }
 }
 declare module builder {
-    class SingletonTagBuilder extends TagBuilder {
+    class SingleCloseTagBuilder extends TagBuilder {
         build(name: string, attributesAndContent: any): string;
         protected close(name: string): string;
     }
@@ -42,15 +119,10 @@ declare module builder {
         protected close(name: string): string;
     }
 }
-declare module utils {
-    class Arrays {
-        static contains(array: any[], object: any): boolean;
-    }
-}
 declare module factory {
     import TagBuilder = builder.TagBuilder;
     class TagBuilderFactory {
-        private static singletonTags;
+        private static singleCloseTags;
         static createTagBuilder(tagName: string): TagBuilder;
         static appendSingleton(name: string): void;
     }

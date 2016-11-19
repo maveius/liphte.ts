@@ -7,8 +7,8 @@ module builder {
 
             let result : string = this.open(name);
 
-            result += this.attributes.render(attributesAndContent);
-            result += this.content.render(attributesAndContent);
+            result += this.buildAttributes(attributesAndContent);
+            result += this.buildContent(attributesAndContent);
 
             result += this.close(name);
 

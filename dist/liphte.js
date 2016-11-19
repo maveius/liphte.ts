@@ -3,143 +3,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var html;
-(function (html) {
-    var Attributes = (function () {
-        function Attributes() {
-            if (Attributes.instance) {
-                throw new Error("Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.");
-            }
-            Attributes.instance = this;
-        }
-        Attributes.prototype.render = function (attributesAndContent) {
-            var attributes = '';
-            for (var _i = 0, attributesAndContent_1 = attributesAndContent; _i < attributesAndContent_1.length; _i++) {
-                var key = attributesAndContent_1[_i];
-                if (this.isJSON(key)) {
-                    attributes += this.extract(key);
-                }
-            }
-            return attributes + '>';
-        };
-        Attributes.prototype.isJSON = function (key) {
-            return !this.isString(key);
-        };
-        Attributes.prototype.isString = function (key) {
-            return ((typeof key) === 'string');
-        };
-        Attributes.prototype.extract = function (key) {
-            var space = '';
-            var tagAttributes = [];
-            for (var id in key) {
-                var value = key[id];
-                var attribute = (id + '="' + this.parse(value) + '"');
-                tagAttributes.push(attribute);
-            }
-            if (tagAttributes.length > 0) {
-                space = ' ';
-            }
-            return space + tagAttributes.join(" ");
-        };
-        Attributes.prototype.parse = function (value) {
-            if (value instanceof Function) {
-                return value();
-            }
-            return value;
-        };
-        Attributes.getInstance = function () {
-            return Attributes.instance;
-        };
-        Attributes.instance = new Attributes();
-        return Attributes;
-    }());
-    html.Attributes = Attributes;
-})(html || (html = {}));
-var html;
-(function (html) {
-    var Content = (function () {
-        function Content() {
-            this.attributes = html.Attributes.getInstance();
-            if (Content.instance) {
-                throw new Error("Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.");
-            }
-            Content.instance = this;
-        }
-        Content.prototype.render = function (attributesAndContent) {
-            var result = '';
-            for (var _i = 0, attributesAndContent_2 = attributesAndContent; _i < attributesAndContent_2.length; _i++) {
-                var key = attributesAndContent_2[_i];
-                if (this.attributes.isString(key)) {
-                    result += key;
-                }
-            }
-            return result;
-        };
-        Content.getInstance = function () {
-            return Content.instance;
-        };
-        Content.instance = new Content();
-        return Content;
-    }());
-    html.Content = Content;
-})(html || (html = {}));
-var builder;
-(function (builder) {
-    var Attributes = html.Attributes;
-    var Content = html.Content;
-    var TagBuilder = (function () {
-        function TagBuilder() {
-            this.attributes = Attributes.getInstance();
-            this.content = Content.getInstance();
-        }
-        TagBuilder.prototype.open = function (name) {
-            return '<' + name;
-        };
-        return TagBuilder;
-    }());
-    builder.TagBuilder = TagBuilder;
-})(builder || (builder = {}));
-var builder;
-(function (builder) {
-    var SingletonTagBuilder = (function (_super) {
-        __extends(SingletonTagBuilder, _super);
-        function SingletonTagBuilder() {
-            _super.apply(this, arguments);
-        }
-        SingletonTagBuilder.prototype.build = function (name, attributesAndContent) {
-            var result = this.open(name);
-            result += this.attributes.render(attributesAndContent).replace(">", "");
-            result += this.close(name);
-            return result;
-        };
-        SingletonTagBuilder.prototype.close = function (name) {
-            return '/>';
-        };
-        return SingletonTagBuilder;
-    }(builder.TagBuilder));
-    builder.SingletonTagBuilder = SingletonTagBuilder;
-})(builder || (builder = {}));
-var builder;
-(function (builder) {
-    var StandardTagBuilder = (function (_super) {
-        __extends(StandardTagBuilder, _super);
-        function StandardTagBuilder() {
-            _super.apply(this, arguments);
-        }
-        StandardTagBuilder.prototype.build = function (name, attributesAndContent) {
-            var result = this.open(name);
-            result += this.attributes.render(attributesAndContent);
-            result += this.content.render(attributesAndContent);
-            result += this.close(name);
-            return result;
-        };
-        StandardTagBuilder.prototype.close = function (name) {
-            return '</' + name + '>';
-        };
-        return StandardTagBuilder;
-    }(builder.TagBuilder));
-    builder.StandardTagBuilder = StandardTagBuilder;
-})(builder || (builder = {}));
 var utils;
 (function (utils) {
     var Arrays = (function () {
@@ -154,28 +17,402 @@ var utils;
             }
             return false;
         };
+        Arrays.isArray = function (instance) {
+            if (Array.isArray(instance)) {
+                return this.checkElements(instance);
+            }
+            return false;
+        };
+        Arrays.checkElements = function (instance) {
+            var stringify = JSON.stringify(instance);
+            for (var _i = 0, instance_1 = instance; _i < instance_1.length; _i++) {
+                var element = instance_1[_i];
+                if (typeof element !== (typeof T)) {
+                    return false;
+                }
+            }
+            return true;
+        };
+        Arrays.identity = function (type) {
+            return typeof (new type());
+        };
         return Arrays;
     }());
     utils.Arrays = Arrays;
+    var JSONs = (function () {
+        function JSONs() {
+        }
+        JSONs.isJSON = function (object) {
+            return JSON.parse(JSON.stringify(object)) instanceof Object;
+        };
+        JSONs.isSimple = function (object) {
+            var result = JSONs.isJSON(object) && !Array.isArray(object);
+            return result;
+        };
+        JSONs.isComplex = function (object) {
+            var result = Arrays.isArray(object);
+            return result;
+        };
+        return JSONs;
+    }());
+    utils.JSONs = JSONs;
+    var Strings = (function () {
+        function Strings() {
+        }
+        Strings.isString = function (object) {
+            return ((typeof object) === 'string');
+        };
+        Strings.EMPTY = '';
+        return Strings;
+    }());
+    utils.Strings = Strings;
+    var TagUtils = (function () {
+        function TagUtils() {
+        }
+        TagUtils.isAttribute = function (object) {
+            var isJSON = JSONs.isSimple(object);
+            var isSimple = JSONs.isSimple(object);
+            var isComplex = JSONs.isComplex(object);
+            var result = (JSONs.isSimple(object) || JSONs.isComplex(object));
+            return result;
+        };
+        TagUtils.isContent = function (object) {
+            var stringify = JSON.stringify(object);
+            if (JSONs.isComplex(object)) {
+                for (var _i = 0, object_1 = object; _i < object_1.length; _i++) {
+                    var element = object_1[_i];
+                    if (JSON.stringify(element).indexOf("Element") > 0) {
+                        return this.isContent(element);
+                    }
+                }
+            }
+            var isNotAttribute = !this.isAttribute(object);
+            var isArrayOfContent = Arrays.isArray(object);
+            var isArray = Array.isArray(object);
+            var isString = Strings.isString(object);
+            return isNotAttribute || isString;
+        };
+        TagUtils.counter = 0;
+        return TagUtils;
+    }());
+    utils.TagUtils = TagUtils;
 })(utils || (utils = {}));
+var strategy;
+(function (strategy) {
+    var RenderStrategy = (function () {
+        function RenderStrategy() {
+        }
+        RenderStrategy.prototype.selectFactory = function (factory) {
+            this.factory = factory;
+        };
+        RenderStrategy.prototype.appendExtractedElement = function (element, results) {
+            this.strategy = this.factory.selectStrategy(element);
+            if (this.strategy !== undefined) {
+                results.push(this.strategy.extract(element));
+            }
+        };
+        return RenderStrategy;
+    }());
+    strategy.RenderStrategy = RenderStrategy;
+})(strategy || (strategy = {}));
+var strategy;
+(function (strategy_1) {
+    var ExtractorContext = (function () {
+        function ExtractorContext(strategy) {
+            this.strategy = strategy;
+        }
+        ExtractorContext.prototype.execute = function (key) {
+            return this.strategy.extract(key);
+        };
+        return ExtractorContext;
+    }());
+    strategy_1.ExtractorContext = ExtractorContext;
+})(strategy || (strategy = {}));
+var html;
+(function (html) {
+    var ExtractorContext = strategy.ExtractorContext;
+    var Renderable = (function () {
+        function Renderable(key) {
+            this.key = key;
+        }
+        Renderable.prototype.execute = function (strategy) {
+            var extractor = new ExtractorContext(strategy);
+            return extractor.execute(this.key);
+        };
+        return Renderable;
+    }());
+    html.Renderable = Renderable;
+})(html || (html = {}));
+var strategy;
+(function (strategy) {
+    var SimpleAttributeRenderStrategy = (function (_super) {
+        __extends(SimpleAttributeRenderStrategy, _super);
+        function SimpleAttributeRenderStrategy() {
+            _super.apply(this, arguments);
+        }
+        SimpleAttributeRenderStrategy.prototype.extract = function (key) {
+            var space = '';
+            var tagAttributes = [];
+            for (var id in key) {
+                var value = key[id];
+                var attribute = (id + '="' + this.parse(value) + '"');
+                tagAttributes.push(attribute);
+            }
+            if (tagAttributes.length > 0) {
+                space = ' ';
+            }
+            return space + tagAttributes.join(" ");
+        };
+        SimpleAttributeRenderStrategy.prototype.parse = function (value) {
+            if (value instanceof Function) {
+                return value();
+            }
+            return value;
+        };
+        return SimpleAttributeRenderStrategy;
+    }(strategy.RenderStrategy));
+    strategy.SimpleAttributeRenderStrategy = SimpleAttributeRenderStrategy;
+})(strategy || (strategy = {}));
+var strategy;
+(function (strategy) {
+    var ComplexAttributeRenderStrategy = (function (_super) {
+        __extends(ComplexAttributeRenderStrategy, _super);
+        function ComplexAttributeRenderStrategy() {
+            _super.call(this);
+            this.selectFactory(factory.AttributeStrategyFactory);
+        }
+        ComplexAttributeRenderStrategy.prototype.extract = function (keys) {
+            var attributes = [];
+            for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+                var element = keys_1[_i];
+                this.appendExtractedElement(element, attributes);
+            }
+            return attributes.join('');
+        };
+        return ComplexAttributeRenderStrategy;
+    }(strategy.RenderStrategy));
+    strategy.ComplexAttributeRenderStrategy = ComplexAttributeRenderStrategy;
+})(strategy || (strategy = {}));
 var factory;
 (function (factory) {
-    var SingletonTagBuilder = builder.SingletonTagBuilder;
+    var JSONs = utils.JSONs;
+    var SimpleAttributeRenderStrategy = strategy.SimpleAttributeRenderStrategy;
+    var ComplexAttributeRenderStrategy = strategy.ComplexAttributeRenderStrategy;
+    var AttributeStrategyFactory = (function () {
+        function AttributeStrategyFactory() {
+        }
+        AttributeStrategyFactory.selectStrategy = function (key) {
+            if (JSONs.isSimple(key)) {
+                return new SimpleAttributeRenderStrategy();
+            }
+            if (JSONs.isComplex(key)) {
+                return new ComplexAttributeRenderStrategy();
+            }
+        };
+        return AttributeStrategyFactory;
+    }());
+    factory.AttributeStrategyFactory = AttributeStrategyFactory;
+})(factory || (factory = {}));
+var html;
+(function (html) {
+    var AttributeStrategyFactory = factory.AttributeStrategyFactory;
+    var Attribute = (function (_super) {
+        __extends(Attribute, _super);
+        function Attribute(key) {
+            _super.call(this, key);
+        }
+        Attribute.prototype.render = function () {
+            var strategy = AttributeStrategyFactory.selectStrategy(this.key);
+            return this.execute(strategy);
+        };
+        return Attribute;
+    }(html.Renderable));
+    html.Attribute = Attribute;
+})(html || (html = {}));
+var strategy;
+(function (strategy) {
+    var ComplexContentRenderStrategy = (function (_super) {
+        __extends(ComplexContentRenderStrategy, _super);
+        function ComplexContentRenderStrategy() {
+            _super.call(this);
+            this.selectFactory(factory.ContentStrategyFactory);
+        }
+        ComplexContentRenderStrategy.prototype.extract = function (keys) {
+            var content = [];
+            for (var _i = 0, keys_2 = keys; _i < keys_2.length; _i++) {
+                var element = keys_2[_i];
+                this.appendExtractedElement(element, content);
+            }
+            return content.join('');
+        };
+        return ComplexContentRenderStrategy;
+    }(strategy.RenderStrategy));
+    strategy.ComplexContentRenderStrategy = ComplexContentRenderStrategy;
+})(strategy || (strategy = {}));
+var strategy;
+(function (strategy) {
+    var SimpleContentRenderStrategy = (function (_super) {
+        __extends(SimpleContentRenderStrategy, _super);
+        function SimpleContentRenderStrategy() {
+            _super.apply(this, arguments);
+        }
+        SimpleContentRenderStrategy.prototype.extract = function (key) {
+            return key;
+        };
+        return SimpleContentRenderStrategy;
+    }(strategy.RenderStrategy));
+    strategy.SimpleContentRenderStrategy = SimpleContentRenderStrategy;
+})(strategy || (strategy = {}));
+var factory;
+(function (factory) {
+    var ComplexContentRenderStrategy = strategy.ComplexContentRenderStrategy;
+    var SimpleContentRenderStrategy = strategy.SimpleContentRenderStrategy;
+    var ContentStrategyFactory = (function () {
+        function ContentStrategyFactory() {
+        }
+        ContentStrategyFactory.selectStrategy = function (key) {
+            if (Array.isArray(key)) {
+                return new ComplexContentRenderStrategy();
+            }
+            return new SimpleContentRenderStrategy();
+        };
+        return ContentStrategyFactory;
+    }());
+    factory.ContentStrategyFactory = ContentStrategyFactory;
+})(factory || (factory = {}));
+var html;
+(function (html) {
+    var ContentStrategyFactory = factory.ContentStrategyFactory;
+    var Content = (function (_super) {
+        __extends(Content, _super);
+        function Content() {
+            _super.apply(this, arguments);
+        }
+        Content.prototype.render = function () {
+            var strategy = ContentStrategyFactory.selectStrategy(this.key);
+            return this.execute(strategy);
+        };
+        return Content;
+    }(html.Renderable));
+    html.Content = Content;
+})(html || (html = {}));
+var factory;
+(function (factory) {
+    var Attribute = html.Attribute;
+    var TagUtils = utils.TagUtils;
+    var Content = html.Content;
+    var Strings = utils.Strings;
+    var RenderableFactory = (function () {
+        function RenderableFactory() {
+        }
+        RenderableFactory.createAttribute = function (key) {
+            if (TagUtils.isAttribute(key)) {
+                return new Attribute(key);
+            }
+            return new Attribute({});
+        };
+        RenderableFactory.createContent = function (key) {
+            var result = TagUtils.isContent(key);
+            if (result) {
+                return new Content(key);
+            }
+            return new Content(Strings.EMPTY);
+        };
+        return RenderableFactory;
+    }());
+    factory.RenderableFactory = RenderableFactory;
+})(factory || (factory = {}));
+var builder;
+(function (builder) {
+    var RenderableFactory = factory.RenderableFactory;
+    var TagBuilder = (function () {
+        function TagBuilder() {
+        }
+        TagBuilder.prototype.buildAttributes = function (attributesAndContent) {
+            var attributes = '';
+            for (var _i = 0, attributesAndContent_1 = attributesAndContent; _i < attributesAndContent_1.length; _i++) {
+                var key = attributesAndContent_1[_i];
+                var renderable = RenderableFactory.createAttribute(key);
+                attributes += renderable.render();
+            }
+            return attributes + '>';
+        };
+        TagBuilder.prototype.buildContent = function (attributesAndContent) {
+            var content = '';
+            var i = 0;
+            for (var _i = 0, attributesAndContent_2 = attributesAndContent; _i < attributesAndContent_2.length; _i++) {
+                var key = attributesAndContent_2[_i];
+                var renderable = RenderableFactory.createContent(key);
+                content += renderable.render();
+            }
+            return content;
+        };
+        TagBuilder.prototype.open = function (name) {
+            return '<' + name;
+        };
+        return TagBuilder;
+    }());
+    builder.TagBuilder = TagBuilder;
+})(builder || (builder = {}));
+var builder;
+(function (builder) {
+    var SingleCloseTagBuilder = (function (_super) {
+        __extends(SingleCloseTagBuilder, _super);
+        function SingleCloseTagBuilder() {
+            _super.apply(this, arguments);
+        }
+        SingleCloseTagBuilder.prototype.build = function (name, attributesAndContent) {
+            var result = this.open(name);
+            result += this.buildAttributes(attributesAndContent).replace(">", "");
+            result += this.close(name);
+            return result;
+        };
+        SingleCloseTagBuilder.prototype.close = function (name) {
+            return '/>';
+        };
+        return SingleCloseTagBuilder;
+    }(builder.TagBuilder));
+    builder.SingleCloseTagBuilder = SingleCloseTagBuilder;
+})(builder || (builder = {}));
+var builder;
+(function (builder) {
+    var StandardTagBuilder = (function (_super) {
+        __extends(StandardTagBuilder, _super);
+        function StandardTagBuilder() {
+            _super.apply(this, arguments);
+        }
+        StandardTagBuilder.prototype.build = function (name, attributesAndContent) {
+            var result = this.open(name);
+            result += this.buildAttributes(attributesAndContent);
+            result += this.buildContent(attributesAndContent);
+            result += this.close(name);
+            return result;
+        };
+        StandardTagBuilder.prototype.close = function (name) {
+            return '</' + name + '>';
+        };
+        return StandardTagBuilder;
+    }(builder.TagBuilder));
+    builder.StandardTagBuilder = StandardTagBuilder;
+})(builder || (builder = {}));
+var factory;
+(function (factory) {
+    var SingleCloseTagBuilder = builder.SingleCloseTagBuilder;
     var StandardTagBuilder = builder.StandardTagBuilder;
     var Arrays = utils.Arrays;
     var TagBuilderFactory = (function () {
         function TagBuilderFactory() {
         }
         TagBuilderFactory.createTagBuilder = function (tagName) {
-            if (Arrays.contains(this.singletonTags, tagName)) {
-                return new SingletonTagBuilder();
+            if (Arrays.contains(this.singleCloseTags, tagName)) {
+                return new SingleCloseTagBuilder();
             }
             return new StandardTagBuilder();
         };
         TagBuilderFactory.appendSingleton = function (name) {
-            this.singletonTags.push(name);
+            this.singleCloseTags.push(name);
         };
-        TagBuilderFactory.singletonTags = [
+        TagBuilderFactory.singleCloseTags = [
             'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source'
         ];
         return TagBuilderFactory;

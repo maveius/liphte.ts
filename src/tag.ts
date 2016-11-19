@@ -35,6 +35,7 @@ module liphte {
             return tagBuilder.build(name, attributesAndContent);
         }
 
+
         public append(tagName: string, singleton?: boolean) {
             this[tagName] = (...attributesAndContent) => this.render(tagName, attributesAndContent);
             if (singleton) {
