@@ -24,7 +24,6 @@ var utils;
             return false;
         };
         Arrays.checkElements = function (instance) {
-            var stringify = JSON.stringify(instance);
             for (var _i = 0, instance_1 = instance; _i < instance_1.length; _i++) {
                 var element = instance_1[_i];
                 if (typeof element !== (typeof T)) {
@@ -70,25 +69,16 @@ var utils;
         function TagUtils() {
         }
         TagUtils.isAttribute = function (object) {
-            var isJSON = JSONs.isSimple(object);
-            var isSimple = JSONs.isSimple(object);
-            var isComplex = JSONs.isComplex(object);
-            var result = (JSONs.isSimple(object) || JSONs.isComplex(object));
-            return result;
+            return (JSONs.isSimple(object) || JSONs.isComplex(object));
         };
         TagUtils.isContent = function (object) {
-            var stringify = JSON.stringify(object);
             if (JSONs.isComplex(object)) {
                 for (var _i = 0, object_1 = object; _i < object_1.length; _i++) {
                     var element = object_1[_i];
-                    if (JSON.stringify(element).indexOf("Element") > 0) {
-                        return this.isContent(element);
-                    }
+                    return this.isContent(element);
                 }
             }
             var isNotAttribute = !this.isAttribute(object);
-            var isArrayOfContent = Arrays.isArray(object);
-            var isArray = Array.isArray(object);
             var isString = Strings.isString(object);
             return isNotAttribute || isString;
         };
@@ -338,7 +328,6 @@ var builder;
         };
         TagBuilder.prototype.buildContent = function (attributesAndContent) {
             var content = '';
-            var i = 0;
             for (var _i = 0, attributesAndContent_2 = attributesAndContent; _i < attributesAndContent_2.length; _i++) {
                 var key = attributesAndContent_2[_i];
                 var renderable = RenderableFactory.createContent(key);

@@ -34,7 +34,6 @@ module builder {
 
             let content = '';
 
-            let i = 0;
             for (let key of attributesAndContent) {
                 let renderable : Renderable = RenderableFactory.createContent(key);
                 content += renderable.render();

@@ -29,8 +29,6 @@ module utils {
 
         private static checkElements<T>(instance : any) : boolean {
 
-            let stringify = JSON.stringify(instance);
-
             for (let element of instance) {
                 if(typeof element !== (typeof T)) {
                     return false;
@@ -75,31 +73,18 @@ module utils {
 
         public static isAttribute(object : any) : boolean {
 
-            let isJSON = JSONs.isSimple(object);
-            let isSimple = JSONs.isSimple(object);
-            let isComplex = JSONs.isComplex(object);
-
-            let result = (JSONs.isSimple(object) || JSONs.isComplex(object));
-
-            return result;
+            return (JSONs.isSimple(object) || JSONs.isComplex(object));
         }
 
         public static isContent(object : any) : boolean {
 
-            let stringify = JSON.stringify(object);
-
             if(JSONs.isComplex(object)) {
                 for(let element of object) {
-                    if(JSON.stringify(element).indexOf("Element") > 0) {
-
-                        return this.isContent(element);
-                    }
+                    return this.isContent(element);
                 }
             }
 
             let isNotAttribute = !this.isAttribute(object);
-            let isArrayOfContent = Arrays.isArray<string>(object);
-            let isArray = Array.isArray(object);
             let isString = Strings.isString(object);
 
             return isNotAttribute || isString ;
