@@ -23,7 +23,6 @@ module builder {
             for (let key of attributesAndContent) {
                 let renderable : Renderable = RenderableFactory.createAttribute(key);
                 attributes += renderable.render();
-                // attributesAndContent.shift();
             }
 
             return attributes + '>';

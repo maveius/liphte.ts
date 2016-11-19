@@ -20,3 +20,9 @@ console.log(
         '<li>Element 15</li>', '<li>Element 16</li>'
     )
 );
+
+console.log(
+    T.template(
+        {id: "ul-id"}
+    )
+);

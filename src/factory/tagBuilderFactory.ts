@@ -24,7 +24,7 @@ module factory {
             return new StandardTagBuilder();
         }
 
-        public static appendSingleton(name : string) {
+        public static appendSingleCloseTag(name : string) {
             this.singleCloseTags.push(name);
         }
     }

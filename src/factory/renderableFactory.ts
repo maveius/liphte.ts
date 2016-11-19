@@ -20,9 +20,7 @@ module factory {
 
         public static createContent(key: any) : Renderable {
 
-            let result = TagUtils.isContent(key);
-
-            if(result) {
+            if(TagUtils.isContent(key)) {
                 return new Content(key);
             }
 

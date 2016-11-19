@@ -13,10 +13,13 @@ module liphte {
 
         //noinspection JSUnusedGlobalSymbols
         constructor() {
+
             if (Tag.instance) {
                 throw new Error("Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.");
             }
+
             super();
+
             this.assignImplementation();
 
             Tag.instance = this;
@@ -27,26 +30,27 @@ module liphte {
             this.appendAll(this.tags);
         }
 
+        public appendAll(tagNames: string[], singleton?: boolean) {
+            for (let tagName of tagNames) {
+                this.append(tagName, singleton);
+            }
+        }
+
+        public append(tagName: string, singleClose?: boolean) {
+
+            if (singleClose) {
+                TagBuilderFactory.appendSingleCloseTag(tagName);
+            }
+
+            this[tagName] = (...attributesAndContent) => this.render(tagName, attributesAndContent);
+
+        }
 
         //noinspection JSMethodCanBeStatic
         private render(name: string, attributesAndContent: any): string {
 
             let tagBuilder: TagBuilder = TagBuilderFactory.createTagBuilder(name);
             return tagBuilder.build(name, attributesAndContent);
-        }
-
-
-        public append(tagName: string, singleton?: boolean) {
-            this[tagName] = (...attributesAndContent) => this.render(tagName, attributesAndContent);
-            if (singleton) {
-                TagBuilderFactory.appendSingleton(tagName);
-            }
-        }
-
-        public appendAll(tagNames: string[], singleton?: boolean) {
-            for (let tagName of tagNames) {
-                this.append(tagName, singleton);
-            }
         }
 
         public static getInstance(): Tag {

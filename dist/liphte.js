@@ -312,8 +312,7 @@ var factory;
             return new Attribute({});
         };
         RenderableFactory.createContent = function (key) {
-            var result = TagUtils.isContent(key);
-            if (result) {
+            if (TagUtils.isContent(key)) {
                 return new Content(key);
             }
             return new Content(Strings.EMPTY);
@@ -409,7 +408,7 @@ var factory;
             }
             return new StandardTagBuilder();
         };
-        TagBuilderFactory.appendSingleton = function (name) {
+        TagBuilderFactory.appendSingleCloseTag = function (name) {
             this.singleCloseTags.push(name);
         };
         TagBuilderFactory.singleCloseTags = [
@@ -1097,12 +1096,17 @@ var liphte;
         Tag.prototype.assignImplementation = function () {
             this.appendAll(this.tags);
         };
-        Tag.prototype.render = function (name, attributesAndContent) {
-            var tagBuilder = TagBuilderFactory.createTagBuilder(name);
-            return tagBuilder.build(name, attributesAndContent);
+        Tag.prototype.appendAll = function (tagNames, singleton) {
+            for (var _i = 0, tagNames_1 = tagNames; _i < tagNames_1.length; _i++) {
+                var tagName = tagNames_1[_i];
+                this.append(tagName, singleton);
+            }
         };
-        Tag.prototype.append = function (tagName, singleton) {
+        Tag.prototype.append = function (tagName, singleClose) {
             var _this = this;
+            if (singleClose) {
+                TagBuilderFactory.appendSingleCloseTag(tagName);
+            }
             this[tagName] = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
@@ -1110,15 +1114,10 @@ var liphte;
                 }
                 return _this.render(tagName, attributesAndContent);
             };
-            if (singleton) {
-                TagBuilderFactory.appendSingleton(tagName);
-            }
         };
-        Tag.prototype.appendAll = function (tagNames, singleton) {
-            for (var _i = 0, tagNames_1 = tagNames; _i < tagNames_1.length; _i++) {
-                var tagName = tagNames_1[_i];
-                this.append(tagName, singleton);
-            }
+        Tag.prototype.render = function (name, attributesAndContent) {
+            var tagBuilder = TagBuilderFactory.createTagBuilder(name);
+            return tagBuilder.build(name, attributesAndContent);
         };
         Tag.getInstance = function () {
             return Tag.instance;

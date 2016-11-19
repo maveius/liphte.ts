@@ -124,7 +124,7 @@ declare module factory {
     class TagBuilderFactory {
         private static singleCloseTags;
         static createTagBuilder(tagName: string): TagBuilder;
-        static appendSingleton(name: string): void;
+        static appendSingleCloseTag(name: string): void;
     }
 }
 declare module html.abstract {
