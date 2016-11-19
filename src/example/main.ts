@@ -10,14 +10,14 @@ console.log(
         {title: "Ambasador"},
         [[{id: "test"}], [{href:"other"}]],
         [[{data: "data-attr"}, {name:"name"}]],
-        [[['<li>Element 1</li>', '<li>Element 2</li>']]],
-        [[['<li>Element 3</li>'], ['<li>Element 4</li>']]],
-        [[['<li>Element 5</li>'], '<li>Element 6</li>']],
-        [['<li>Element 7</li>'], ['<li>Element 8</li>']],
-        ['<li>Element 9</li>', '<li>Element 10</li>'],
-        [['<li>Element 11</li>', '<li>Element 12</li>']],
-        ['<li>Element 13</li>', '<li>Element 14</li>'],
-        '<li>Element 15</li>', '<li>Element 16</li>'
+        [[[T.li('Element 1'), T.li('Element 2')]]],
+        [[[T.li('Element 3')], [T.li('Element 4')]]],
+        [[[T.li('Element 5')], T.li('Element 6')]],
+        [[T.li('Element 7')], [T.li('Element 8')]],
+        [T.li('Element 9'), T.li('Element 10')],
+        [[T.li('Element 11'), T.li('Element 12')]],
+        [T.li('Element 13'), T.li('Element 14')],
+        T.li('Element 15'), T.li('Element 16')
     )
 );
 
