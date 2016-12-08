@@ -288,55 +288,91 @@ var html;
 })(html || (html = {}));
 var factory;
 (function (factory) {
-    var Attribute = html.Attribute;
-    var TagUtils = utils.TagUtils;
-    var Content = html.Content;
-    var Strings = utils.Strings;
     var RenderableFactory = (function () {
         function RenderableFactory() {
         }
-        RenderableFactory.createAttribute = function (key) {
+        return RenderableFactory;
+    }());
+    factory.RenderableFactory = RenderableFactory;
+})(factory || (factory = {}));
+var factory;
+(function (factory) {
+    var Attribute = html.Attribute;
+    var TagUtils = utils.TagUtils;
+    var AttributeRenderableFactory = (function (_super) {
+        __extends(AttributeRenderableFactory, _super);
+        function AttributeRenderableFactory() {
+            _super.apply(this, arguments);
+        }
+        AttributeRenderableFactory.prototype.createRenderable = function (key) {
             if (TagUtils.isAttribute(key)) {
                 return new Attribute(key);
             }
             return new Attribute({});
         };
-        RenderableFactory.createContent = function (key) {
+        AttributeRenderableFactory.prototype.closeTagCharacter = function () {
+            return '>';
+        };
+        return AttributeRenderableFactory;
+    }(factory.RenderableFactory));
+    factory.AttributeRenderableFactory = AttributeRenderableFactory;
+})(factory || (factory = {}));
+var factory;
+(function (factory) {
+    var TagUtils = utils.TagUtils;
+    var Content = html.Content;
+    var Strings = utils.Strings;
+    var ContentRenderableFactory = (function (_super) {
+        __extends(ContentRenderableFactory, _super);
+        function ContentRenderableFactory() {
+            _super.apply(this, arguments);
+        }
+        ContentRenderableFactory.prototype.createRenderable = function (key) {
             if (TagUtils.isContent(key)) {
                 return new Content(key);
             }
             return new Content(Strings.EMPTY);
         };
-        return RenderableFactory;
-    }());
-    factory.RenderableFactory = RenderableFactory;
+        ContentRenderableFactory.prototype.closeTagCharacter = function () {
+            return Strings.EMPTY;
+        };
+        return ContentRenderableFactory;
+    }(factory.RenderableFactory));
+    factory.ContentRenderableFactory = ContentRenderableFactory;
 })(factory || (factory = {}));
 var builder;
 (function (builder) {
-    var RenderableFactory = factory.RenderableFactory;
+    var AttributeRenderableFactory = factory.AttributeRenderableFactory;
+    var ContentRenderableFactory = factory.ContentRenderableFactory;
     var TagBuilder = (function () {
         function TagBuilder() {
         }
-        TagBuilder.prototype.buildAttributes = function (attributesAndContent) {
-            var attributes = '';
-            for (var _i = 0, attributesAndContent_1 = attributesAndContent; _i < attributesAndContent_1.length; _i++) {
-                var key = attributesAndContent_1[_i];
-                var renderable = RenderableFactory.createAttribute(key);
-                attributes += renderable.render();
-            }
-            return attributes + '>';
-        };
-        TagBuilder.prototype.buildContent = function (attributesAndContent) {
-            var content = '';
-            for (var _i = 0, attributesAndContent_2 = attributesAndContent; _i < attributesAndContent_2.length; _i++) {
-                var key = attributesAndContent_2[_i];
-                var renderable = RenderableFactory.createContent(key);
-                content += renderable.render();
-            }
-            return content;
+        TagBuilder.prototype.build = function (name, attributesAndContent) {
+            var result = this.open(name);
+            result += this.buildAttributes(attributesAndContent);
+            result += this.buildContent(attributesAndContent);
+            result += this.close(name);
+            return result;
         };
         TagBuilder.prototype.open = function (name) {
             return '<' + name;
+        };
+        TagBuilder.prototype.buildAttributes = function (attributesAndContent) {
+            var factory = new AttributeRenderableFactory();
+            return this.buildPart(attributesAndContent, factory);
+        };
+        TagBuilder.prototype.buildContent = function (attributesAndContent) {
+            var factory = new ContentRenderableFactory();
+            return this.buildPart(attributesAndContent, factory);
+        };
+        TagBuilder.prototype.buildPart = function (attributesAndContent, factory) {
+            var partOfTag = '';
+            for (var _i = 0, attributesAndContent_1 = attributesAndContent; _i < attributesAndContent_1.length; _i++) {
+                var key = attributesAndContent_1[_i];
+                var renderable = factory.createRenderable(key);
+                partOfTag += renderable.render();
+            }
+            return partOfTag + this.endAttributes(factory);
         };
         return TagBuilder;
     }());
@@ -344,16 +380,14 @@ var builder;
 })(builder || (builder = {}));
 var builder;
 (function (builder) {
+    var Strings = utils.Strings;
     var SingleCloseTagBuilder = (function (_super) {
         __extends(SingleCloseTagBuilder, _super);
         function SingleCloseTagBuilder() {
             _super.apply(this, arguments);
         }
-        SingleCloseTagBuilder.prototype.build = function (name, attributesAndContent) {
-            var result = this.open(name);
-            result += this.buildAttributes(attributesAndContent).replace(">", "");
-            result += this.close(name);
-            return result;
+        SingleCloseTagBuilder.prototype.endAttributes = function (factory) {
+            return Strings.EMPTY;
         };
         SingleCloseTagBuilder.prototype.close = function (name) {
             return '/>';
@@ -369,12 +403,8 @@ var builder;
         function StandardTagBuilder() {
             _super.apply(this, arguments);
         }
-        StandardTagBuilder.prototype.build = function (name, attributesAndContent) {
-            var result = this.open(name);
-            result += this.buildAttributes(attributesAndContent);
-            result += this.buildContent(attributesAndContent);
-            result += this.close(name);
-            return result;
+        StandardTagBuilder.prototype.endAttributes = function (factory) {
+            return factory.closeTagCharacter();
         };
         StandardTagBuilder.prototype.close = function (name) {
             return '</' + name + '>';
@@ -1085,10 +1115,10 @@ var liphte;
         Tag.prototype.assignImplementation = function () {
             this.appendAll(this.tags);
         };
-        Tag.prototype.appendAll = function (tagNames, singleton) {
+        Tag.prototype.appendAll = function (tagNames, singleClose) {
             for (var _i = 0, tagNames_1 = tagNames; _i < tagNames_1.length; _i++) {
                 var tagName = tagNames_1[_i];
-                this.append(tagName, singleton);
+                this.append(tagName, singleClose);
             }
         };
         Tag.prototype.append = function (tagName, singleClose) {

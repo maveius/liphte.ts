@@ -1,21 +1,17 @@
 ///<reference path="tagBuilder.ts"/>
 
 module builder {
+    import Strings = utils.Strings;
+    import RenderableFactory = factory.RenderableFactory;
+
     export class StandardTagBuilder extends TagBuilder {
 
-        public build(name: string, attributesAndContent: any): string {
 
-            let result : string = this.open(name);
-
-            result += this.buildAttributes(attributesAndContent);
-            result += this.buildContent(attributesAndContent);
-
-            result += this.close(name);
-
-            return result;
+        protected endAttributes(factory : RenderableFactory): string {
+            return factory.closeTagCharacter();
         }
 
-        //noinspection JSMethodCanBeStatic
+
         protected close(name : string) : string {
             return '</'+name+'>';
         }

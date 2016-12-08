@@ -26,3 +26,11 @@ console.log(
         {id: "ul-id"}
     )
 );
+
+console.log(
+  T.div(
+      T.br(),
+      T.area(),
+      T.img()
+  )
+);

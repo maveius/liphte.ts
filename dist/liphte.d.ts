@@ -93,29 +93,48 @@ declare module html {
 }
 declare module factory {
     import Renderable = html.Renderable;
-    class RenderableFactory {
-        static createAttribute(key: any): Renderable;
-        static createContent(key: any): Renderable;
+    abstract class RenderableFactory {
+        abstract createRenderable(key: any): Renderable;
+        abstract closeTagCharacter(): string;
+    }
+}
+declare module factory {
+    import Renderable = html.Renderable;
+    class AttributeRenderableFactory extends RenderableFactory {
+        createRenderable(key: any): Renderable;
+        closeTagCharacter(): string;
+    }
+}
+declare module factory {
+    import Renderable = html.Renderable;
+    class ContentRenderableFactory extends RenderableFactory {
+        createRenderable(key: any): Renderable;
+        closeTagCharacter(): string;
     }
 }
 declare module builder {
+    import RenderableFactory = factory.RenderableFactory;
     abstract class TagBuilder {
-        abstract build(name: string, attributesAndContent: any): string;
-        protected buildAttributes(attributesAndContent: any): string;
-        protected buildContent(attributesAndContent: any): string;
+        build(name: string, attributesAndContent: any): string;
         protected open(name: string): string;
+        private buildAttributes(attributesAndContent);
+        private buildContent(attributesAndContent);
+        private buildPart(attributesAndContent, factory);
+        protected abstract endAttributes(factory: RenderableFactory): string;
         protected abstract close(name: string): string;
     }
 }
 declare module builder {
+    import RenderableFactory = factory.RenderableFactory;
     class SingleCloseTagBuilder extends TagBuilder {
-        build(name: string, attributesAndContent: any): string;
+        protected endAttributes(factory: RenderableFactory): string;
         protected close(name: string): string;
     }
 }
 declare module builder {
+    import RenderableFactory = factory.RenderableFactory;
     class StandardTagBuilder extends TagBuilder {
-        build(name: string, attributesAndContent: any): string;
+        protected endAttributes(factory: RenderableFactory): string;
         protected close(name: string): string;
     }
 }

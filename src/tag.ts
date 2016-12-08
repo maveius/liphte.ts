@@ -11,6 +11,7 @@ module liphte {
 
         private static instance: Tag = new Tag();
 
+
         //noinspection JSUnusedGlobalSymbols
         constructor() {
 
@@ -30,11 +31,13 @@ module liphte {
             this.appendAll(this.tags);
         }
 
-        public appendAll(tagNames: string[], singleton?: boolean) {
+
+        public appendAll(tagNames: string[], singleClose?: boolean) {
             for (let tagName of tagNames) {
-                this.append(tagName, singleton);
+                this.append(tagName, singleClose);
             }
         }
+
 
         public append(tagName: string, singleClose?: boolean) {
 
@@ -46,12 +49,14 @@ module liphte {
 
         }
 
+
         //noinspection JSMethodCanBeStatic
         private render(name: string, attributesAndContent: any): string {
 
             let tagBuilder: TagBuilder = TagBuilderFactory.createTagBuilder(name);
             return tagBuilder.build(name, attributesAndContent);
         }
+
 
         public static getInstance(): Tag {
             return Tag.instance;

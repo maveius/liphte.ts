@@ -5,7 +5,6 @@
 
 module factory {
     import JSONs = utils.JSONs;
-
     import TagUtils = utils.TagUtils;
     import ExtractorStrategy = strategy.RenderStrategy;
     import ComplexContentRenderStrategy = strategy.ComplexContentRenderStrategy;

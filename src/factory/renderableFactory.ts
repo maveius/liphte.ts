@@ -1,30 +1,11 @@
 module factory {
-
-    import Attribute = html.Attribute;
     import Renderable = html.Renderable;
-    import TagUtils = utils.TagUtils;
-    import Content = html.Content;
-    import Strings = utils.Strings;
 
-    export class RenderableFactory {
+    export abstract class RenderableFactory {
 
-        public static createAttribute(key: any) : Renderable {
+        public abstract createRenderable(key: any) : Renderable;
 
+        public abstract closeTagCharacter() : string;
 
-            if (TagUtils.isAttribute(key)) {
-                return new Attribute(key);
-            }
-
-            return new Attribute({});
-        }
-
-        public static createContent(key: any) : Renderable {
-
-            if(TagUtils.isContent(key)) {
-                return new Content(key);
-            }
-
-            return new Content(Strings.EMPTY);
-        }
     }
 }
