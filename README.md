@@ -1,3 +1,4 @@
+![ Liphte ](http://maveius.pl/liphte.ts/img/liphte.ts.png)
 # LiphteTS - liphte.ts
 liphte.ts - is fork of maveius/liphte library to write HTML tag in TypeScript and JavaScript
 Liphte TS is Lightweight & minimalistic HTML Builder/Generator (or maybe Template Engine) for JavaScript and TypeScript
@@ -66,4 +67,4 @@ wget https://github.com/maveius/liphte.ts/archive/master.zip
 - MIT
 
 ## Home Page
-- in progress
+http://maveius.pl/liphte.ts/
