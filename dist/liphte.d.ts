@@ -117,8 +117,8 @@ declare module builder {
     abstract class TagBuilder {
         build(name: string, attributesAndContent: any): string;
         protected open(name: string): string;
-        private buildAttributes(attributesAndContent);
-        private buildContent(attributesAndContent);
+        protected buildAttributes(attributesAndContent: any): string;
+        protected buildContent(attributesAndContent: any): string;
         private buildPart(attributesAndContent, factory);
         protected abstract endAttributes(factory: RenderableFactory): string;
         protected abstract close(name: string): string;
@@ -127,6 +127,7 @@ declare module builder {
 declare module builder {
     import RenderableFactory = factory.RenderableFactory;
     class SingleCloseTagBuilder extends TagBuilder {
+        protected buildContent(attributesAndContent: any): string;
         protected endAttributes(factory: RenderableFactory): string;
         protected close(name: string): string;
     }
@@ -262,3 +263,4 @@ declare module html.abstract {
 declare module liphte {
     let tag: any;
 }
+declare let T: any;

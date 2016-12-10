@@ -32,13 +32,13 @@ module builder {
         }
 
 
-        private buildAttributes(attributesAndContent : any) : string {
+        protected buildAttributes(attributesAndContent : any) : string {
             let factory : RenderableFactory = new AttributeRenderableFactory();
             return this.buildPart(attributesAndContent, factory);
         }
 
 
-        private buildContent(attributesAndContent : any) {
+        protected buildContent(attributesAndContent : any) {
             let factory : RenderableFactory = new ContentRenderableFactory();
             return this.buildPart(attributesAndContent, factory);
         }

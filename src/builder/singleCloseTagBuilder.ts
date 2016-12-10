@@ -7,6 +7,10 @@ module builder {
     export class SingleCloseTagBuilder extends TagBuilder {
 
 
+        protected buildContent(attributesAndContent: any): string {
+            return Strings.EMPTY;
+        }
+
         protected endAttributes(factory : RenderableFactory): string {
             return Strings.EMPTY;
         }

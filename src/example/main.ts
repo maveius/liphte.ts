@@ -29,8 +29,8 @@ console.log(
 
 console.log(
   T.div(
-      T.br(),
-      T.area(),
-      T.img()
+      T.br('test'),
+      T.area('test'),
+      T.img('test')
   )
 );
