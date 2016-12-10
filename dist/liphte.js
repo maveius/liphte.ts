@@ -348,11 +348,11 @@ var builder;
         function TagBuilder() {
         }
         TagBuilder.prototype.build = function (name, attributesAndContent) {
-            var result = this.open(name);
-            result += this.buildAttributes(attributesAndContent);
-            result += this.buildContent(attributesAndContent);
-            result += this.close(name);
-            return result;
+            var htmlTag = this.open(name);
+            htmlTag += this.buildAttributes(attributesAndContent);
+            htmlTag += this.buildContent(attributesAndContent);
+            htmlTag += this.close(name);
+            return htmlTag;
         };
         TagBuilder.prototype.open = function (name) {
             return '<' + name;
@@ -380,60 +380,63 @@ var builder;
 })(builder || (builder = {}));
 var builder;
 (function (builder) {
-    var Strings = utils.Strings;
-    var SingleCloseTagBuilder = (function (_super) {
-        __extends(SingleCloseTagBuilder, _super);
-        function SingleCloseTagBuilder() {
+    var PairedClosingTagBuilder = (function (_super) {
+        __extends(PairedClosingTagBuilder, _super);
+        function PairedClosingTagBuilder() {
             _super.apply(this, arguments);
         }
-        SingleCloseTagBuilder.prototype.buildContent = function (attributesAndContent) {
-            return Strings.EMPTY;
+        PairedClosingTagBuilder.prototype.endAttributes = function (factory) {
+            return factory.closeTagCharacter();
         };
-        SingleCloseTagBuilder.prototype.endAttributes = function (factory) {
-            return Strings.EMPTY;
+        PairedClosingTagBuilder.prototype.close = function (name) {
+            return '</' + name + '>';
         };
-        SingleCloseTagBuilder.prototype.close = function (name) {
-            return '/>';
-        };
-        return SingleCloseTagBuilder;
+        return PairedClosingTagBuilder;
     }(builder.TagBuilder));
-    builder.SingleCloseTagBuilder = SingleCloseTagBuilder;
+    builder.PairedClosingTagBuilder = PairedClosingTagBuilder;
 })(builder || (builder = {}));
 var builder;
 (function (builder) {
-    var StandardTagBuilder = (function (_super) {
-        __extends(StandardTagBuilder, _super);
-        function StandardTagBuilder() {
+    var Strings = utils.Strings;
+    var SelfClosingTagBuilder = (function (_super) {
+        __extends(SelfClosingTagBuilder, _super);
+        function SelfClosingTagBuilder() {
             _super.apply(this, arguments);
         }
-        StandardTagBuilder.prototype.endAttributes = function (factory) {
-            return factory.closeTagCharacter();
+        SelfClosingTagBuilder.prototype.buildContent = function (attributesAndContent) {
+            return Strings.EMPTY;
         };
-        StandardTagBuilder.prototype.close = function (name) {
-            return '</' + name + '>';
+        SelfClosingTagBuilder.prototype.endAttributes = function (factory) {
+            return Strings.EMPTY;
         };
-        return StandardTagBuilder;
+        SelfClosingTagBuilder.prototype.close = function (name) {
+            return '/>';
+        };
+        return SelfClosingTagBuilder;
     }(builder.TagBuilder));
-    builder.StandardTagBuilder = StandardTagBuilder;
+    builder.SelfClosingTagBuilder = SelfClosingTagBuilder;
 })(builder || (builder = {}));
 var factory;
 (function (factory) {
-    var SingleCloseTagBuilder = builder.SingleCloseTagBuilder;
-    var StandardTagBuilder = builder.StandardTagBuilder;
+    var SelfClosingTagBuilder = builder.SelfClosingTagBuilder;
+    var PairedClosingTagBuilder = builder.PairedClosingTagBuilder;
     var Arrays = utils.Arrays;
     var TagBuilderFactory = (function () {
         function TagBuilderFactory() {
         }
         TagBuilderFactory.createTagBuilder = function (tagName) {
-            if (Arrays.contains(this.singleCloseTags, tagName)) {
-                return new SingleCloseTagBuilder();
+            if (this.isSelfClosingTag(tagName)) {
+                return new SelfClosingTagBuilder();
             }
-            return new StandardTagBuilder();
+            return new PairedClosingTagBuilder();
+        };
+        TagBuilderFactory.isSelfClosingTag = function (tagName) {
+            return Arrays.contains(this.selfClosingTags, tagName);
         };
         TagBuilderFactory.appendSingleCloseTag = function (name) {
-            this.singleCloseTags.push(name);
+            this.selfClosingTags.push(name);
         };
-        TagBuilderFactory.singleCloseTags = [
+        TagBuilderFactory.selfClosingTags = [
             'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source'
         ];
         return TagBuilderFactory;
@@ -444,666 +447,666 @@ var html;
 (function (html) {
     var abstract;
     (function (abstract) {
-        var Mark = (function () {
-            function Mark() {
-                this.tags = Object.getOwnPropertyNames(Mark.prototype);
+        var Markup = (function () {
+            function Markup() {
+                this.tags = Object.getOwnPropertyNames(Markup.prototype);
             }
-            Mark.prototype.a = function () {
+            Markup.prototype.a = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.abbr = function () {
+            Markup.prototype.abbr = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.address = function () {
+            Markup.prototype.address = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.area = function () {
+            Markup.prototype.area = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.article = function () {
+            Markup.prototype.article = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.aside = function () {
+            Markup.prototype.aside = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.audio = function () {
+            Markup.prototype.audio = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.b = function () {
+            Markup.prototype.b = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.base = function () {
+            Markup.prototype.base = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.bdi = function () {
+            Markup.prototype.bdi = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.bdo = function () {
+            Markup.prototype.bdo = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.blockquote = function () {
+            Markup.prototype.blockquote = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.body = function () {
+            Markup.prototype.body = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.br = function () {
+            Markup.prototype.br = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.button = function () {
+            Markup.prototype.button = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.canvas = function () {
+            Markup.prototype.canvas = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.caption = function () {
+            Markup.prototype.caption = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.cite = function () {
+            Markup.prototype.cite = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.code = function () {
+            Markup.prototype.code = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.col = function () {
+            Markup.prototype.col = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.colgroup = function () {
+            Markup.prototype.colgroup = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.command = function () {
+            Markup.prototype.command = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.datalist = function () {
+            Markup.prototype.datalist = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.dd = function () {
+            Markup.prototype.dd = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.del = function () {
+            Markup.prototype.del = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.details = function () {
+            Markup.prototype.details = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.dfn = function () {
+            Markup.prototype.dfn = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.div = function () {
+            Markup.prototype.div = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.dl = function () {
+            Markup.prototype.dl = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.dt = function () {
+            Markup.prototype.dt = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.em = function () {
+            Markup.prototype.em = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.embed = function () {
+            Markup.prototype.embed = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.fieldset = function () {
+            Markup.prototype.fieldset = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.figcaption = function () {
+            Markup.prototype.figcaption = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.figure = function () {
+            Markup.prototype.figure = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.footer = function () {
+            Markup.prototype.footer = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.form = function () {
+            Markup.prototype.form = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.h1 = function () {
+            Markup.prototype.h1 = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.h2 = function () {
+            Markup.prototype.h2 = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.h3 = function () {
+            Markup.prototype.h3 = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.h4 = function () {
+            Markup.prototype.h4 = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.h5 = function () {
+            Markup.prototype.h5 = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.h6 = function () {
+            Markup.prototype.h6 = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.head = function () {
+            Markup.prototype.head = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.header = function () {
+            Markup.prototype.header = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.hgroup = function () {
+            Markup.prototype.hgroup = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.hr = function () {
+            Markup.prototype.hr = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.html = function () {
+            Markup.prototype.html = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.i = function () {
+            Markup.prototype.i = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.iframe = function () {
+            Markup.prototype.iframe = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.img = function () {
+            Markup.prototype.img = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.input = function () {
+            Markup.prototype.input = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.ins = function () {
+            Markup.prototype.ins = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.kbd = function () {
+            Markup.prototype.kbd = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.keygen = function () {
+            Markup.prototype.keygen = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.label = function () {
+            Markup.prototype.label = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.legend = function () {
+            Markup.prototype.legend = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.li = function () {
+            Markup.prototype.li = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.link = function () {
+            Markup.prototype.link = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.map = function () {
+            Markup.prototype.map = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.mark = function () {
+            Markup.prototype.mark = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.menu = function () {
+            Markup.prototype.menu = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.meta = function () {
+            Markup.prototype.meta = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.meter = function () {
+            Markup.prototype.meter = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.nav = function () {
+            Markup.prototype.nav = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.noscript = function () {
+            Markup.prototype.noscript = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.object = function () {
+            Markup.prototype.object = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.ol = function () {
+            Markup.prototype.ol = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.optgroup = function () {
+            Markup.prototype.optgroup = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.option = function () {
+            Markup.prototype.option = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.output = function () {
+            Markup.prototype.output = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.p = function () {
+            Markup.prototype.p = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.param = function () {
+            Markup.prototype.param = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.pre = function () {
+            Markup.prototype.pre = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.progress = function () {
+            Markup.prototype.progress = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.q = function () {
+            Markup.prototype.q = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.rp = function () {
+            Markup.prototype.rp = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.rt = function () {
+            Markup.prototype.rt = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.ruby = function () {
+            Markup.prototype.ruby = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.s = function () {
+            Markup.prototype.s = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.samp = function () {
+            Markup.prototype.samp = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.script = function () {
+            Markup.prototype.script = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.section = function () {
+            Markup.prototype.section = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.select = function () {
+            Markup.prototype.select = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.small = function () {
+            Markup.prototype.small = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.source = function () {
+            Markup.prototype.source = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.span = function () {
+            Markup.prototype.span = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.strong = function () {
+            Markup.prototype.strong = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.style = function () {
+            Markup.prototype.style = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.sub = function () {
+            Markup.prototype.sub = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.summary = function () {
+            Markup.prototype.summary = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.sup = function () {
+            Markup.prototype.sup = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.table = function () {
+            Markup.prototype.table = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.tbody = function () {
+            Markup.prototype.tbody = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.td = function () {
+            Markup.prototype.td = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.textarea = function () {
+            Markup.prototype.textarea = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.tfoot = function () {
+            Markup.prototype.tfoot = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.th = function () {
+            Markup.prototype.th = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.thead = function () {
+            Markup.prototype.thead = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.time = function () {
+            Markup.prototype.time = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.title = function () {
+            Markup.prototype.title = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.tr = function () {
+            Markup.prototype.tr = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.track = function () {
+            Markup.prototype.track = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.u = function () {
+            Markup.prototype.u = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.ul = function () {
+            Markup.prototype.ul = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.var = function () {
+            Markup.prototype.var = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.video = function () {
+            Markup.prototype.video = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            Mark.prototype.wbr = function () {
+            Markup.prototype.wbr = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     attributesAndContent[_i - 0] = arguments[_i];
                 }
             };
-            return Mark;
+            return Markup;
         }());
-        abstract.Mark = Mark;
+        abstract.Markup = Markup;
     })(abstract = html.abstract || (html.abstract = {}));
 })(html || (html = {}));
 var liphte;
 (function (liphte) {
-    var Mark = html.abstract.Mark;
+    var Mark = html.abstract.Markup;
     var TagBuilderFactory = factory.TagBuilderFactory;
     var Tag = (function (_super) {
         __extends(Tag, _super);
@@ -1149,10 +1152,4 @@ var liphte;
     }(Mark));
     liphte.tag = Tag.getInstance();
 })(liphte || (liphte = {}));
-var T = liphte.tag;
-T.append('template');
-console.log();
-console.log(T.ul({ title: "Ambasador" }, [[{ id: "test" }], [{ href: "other" }]], [[{ data: "data-attr" }, { name: "name" }]], [[[T.li('Element 1'), T.li('Element 2')]]], [[[T.li('Element 3')], [T.li('Element 4')]]], [[[T.li('Element 5')], T.li('Element 6')]], [[T.li('Element 7')], [T.li('Element 8')]], [T.li('Element 9'), T.li('Element 10')], [[T.li('Element 11'), T.li('Element 12')]], [T.li('Element 13'), T.li('Element 14')], T.li('Element 15'), T.li('Element 16')));
-console.log(T.template({ id: "ul-id" }));
-console.log(T.div(T.br('test'), T.area('test'), T.img('test')));
 //# sourceMappingURL=liphte.js.map

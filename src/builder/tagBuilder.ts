@@ -13,16 +13,17 @@ module builder {
     export abstract class TagBuilder {
 
 
+        /** Template Method Pattern **/
         public build(name : string, attributesAndContent : any) : string {
 
-            let result: string = this.open(name);
+            let htmlTag: string = this.open(name);
 
-            result += this.buildAttributes(attributesAndContent);
-            result += this.buildContent(attributesAndContent);
+            htmlTag += this.buildAttributes(attributesAndContent);
+            htmlTag += this.buildContent(attributesAndContent);
 
-            result += this.close(name);
+            htmlTag += this.close(name);
 
-            return result;
+            return htmlTag;
         }
 
 
@@ -44,6 +45,7 @@ module builder {
         }
 
 
+        /** Template Method Pattern **/
         private buildPart(attributesAndContent : any, factory : RenderableFactory ) : string {
 
             let partOfTag: string = '';

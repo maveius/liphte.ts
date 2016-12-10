@@ -8,9 +8,8 @@
     "removeComments": true,
     "outDir": "dist/",
     "outFile": "dist/liphte.js"
-  }
-//,
-//  "exclude": [
-//    "src/example"
-//  ]
+  },
+  "exclude": [
+    "src/example"
+  ]
 }

@@ -4,7 +4,7 @@ module builder {
     import Strings = utils.Strings;
     import RenderableFactory = factory.RenderableFactory;
 
-    export class SingleCloseTagBuilder extends TagBuilder {
+    export class SelfClosingTagBuilder extends TagBuilder {
 
 
         protected buildContent(attributesAndContent: any): string {

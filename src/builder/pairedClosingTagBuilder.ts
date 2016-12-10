@@ -4,7 +4,7 @@ module builder {
     import Strings = utils.Strings;
     import RenderableFactory = factory.RenderableFactory;
 
-    export class StandardTagBuilder extends TagBuilder {
+    export class PairedClosingTagBuilder extends TagBuilder {
 
 
         protected endAttributes(factory : RenderableFactory): string {

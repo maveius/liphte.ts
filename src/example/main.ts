@@ -29,7 +29,7 @@ console.log(
 
 console.log(
   T.div(
-      T.br('test'),
+      T.br({id: 'nextLineBreak'},'test'),
       T.area('test'),
       T.img('test')
   )

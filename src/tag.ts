@@ -1,9 +1,9 @@
-///<reference path="html/abstract/mark.ts"/>
+///<reference path="html/abstract/markup.ts"/>
 ///<reference path="./builder/tagBuilder.ts"/>
 ///<reference path="./factory/tagBuilderFactory.ts"/>
 
 module liphte {
-    import Mark = html.abstract.Mark;
+    import Mark = html.abstract.Markup;
     import TagBuilder = builder.TagBuilder;
     import TagBuilderFactory = factory.TagBuilderFactory;
 

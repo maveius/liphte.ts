@@ -1,7 +1,7 @@
 module html.abstract {
-    export abstract class Mark {
+    export abstract class Markup {
 
-        protected tags: string[] = Object.getOwnPropertyNames(Mark.prototype);
+        protected tags: string[] = Object.getOwnPropertyNames(Markup.prototype);
 
         a(...attributesAndContent){}
         abbr(...attributesAndContent){}

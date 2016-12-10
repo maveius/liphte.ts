@@ -126,15 +126,15 @@ declare module builder {
 }
 declare module builder {
     import RenderableFactory = factory.RenderableFactory;
-    class SingleCloseTagBuilder extends TagBuilder {
-        protected buildContent(attributesAndContent: any): string;
+    class PairedClosingTagBuilder extends TagBuilder {
         protected endAttributes(factory: RenderableFactory): string;
         protected close(name: string): string;
     }
 }
 declare module builder {
     import RenderableFactory = factory.RenderableFactory;
-    class StandardTagBuilder extends TagBuilder {
+    class SelfClosingTagBuilder extends TagBuilder {
+        protected buildContent(attributesAndContent: any): string;
         protected endAttributes(factory: RenderableFactory): string;
         protected close(name: string): string;
     }
@@ -142,13 +142,14 @@ declare module builder {
 declare module factory {
     import TagBuilder = builder.TagBuilder;
     class TagBuilderFactory {
-        private static singleCloseTags;
+        private static selfClosingTags;
         static createTagBuilder(tagName: string): TagBuilder;
+        private static isSelfClosingTag(tagName);
         static appendSingleCloseTag(name: string): void;
     }
 }
 declare module html.abstract {
-    abstract class Mark {
+    abstract class Markup {
         protected tags: string[];
         a(...attributesAndContent: any[]): void;
         abbr(...attributesAndContent: any[]): void;
@@ -263,4 +264,3 @@ declare module html.abstract {
 declare module liphte {
     let tag: any;
 }
-declare let T: any;
