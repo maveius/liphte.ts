@@ -3,7 +3,7 @@
 ///<reference path="../strategy/content/complexContentRenderStrategy.ts"/>
 ///<reference path="../strategy/content/simpleContentRenderStrategy.ts"/>
 
-module factory {
+module liphte.factory {
     import JSONs = utils.JSONs;
     import TagUtils = utils.TagUtils;
     import ExtractorStrategy = strategy.RenderStrategy;

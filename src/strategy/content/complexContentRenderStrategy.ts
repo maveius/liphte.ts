@@ -1,7 +1,7 @@
 ///<reference path="../renderStrategy.ts"/>
 ///<reference path="../../factory/contentStrategyFactory.ts"/>
 
-module strategy {
+module liphte.strategy {
 
     export class ComplexContentRenderStrategy extends RenderStrategy {
 

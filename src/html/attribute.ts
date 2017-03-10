@@ -4,7 +4,7 @@
 ///<reference path="../strategy/renderContext.ts"/>
 ///<reference path="../factory/attributeStrategyFactory.ts"/>
 
-module html {
+module liphte.html {
 
     import JSONs = utils.JSONs;
     import Arrays = utils.Arrays;

@@ -1,4 +1,4 @@
-module strategy {
+module liphte.strategy {
     export abstract class RenderStrategy {
 
         protected factory;

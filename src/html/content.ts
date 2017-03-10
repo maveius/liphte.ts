@@ -3,7 +3,7 @@
 ///<reference path="../strategy/renderContext.ts"/>
 ///<reference path="../factory/contentStrategyFactory.ts"/>
 
-module html {
+module liphte.html {
 
     import Strings = utils.Strings;
     import TagUtils = utils.TagUtils;

@@ -1,6 +1,6 @@
-module factory {
-    import Attribute = html.Attribute;
-    import Renderable = html.Renderable;
+module liphte.factory {
+    import Attribute = liphte.html.Attribute;
+    import Renderable = liphte.html.Renderable;
     import TagUtils = utils.TagUtils;
 
     export class AttributeRenderableFactory extends RenderableFactory {

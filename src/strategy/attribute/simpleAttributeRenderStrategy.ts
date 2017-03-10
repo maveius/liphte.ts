@@ -1,4 +1,4 @@
-module strategy {
+module liphte.strategy {
     export class SimpleAttributeRenderStrategy extends RenderStrategy {
 
         public extract(key): string {

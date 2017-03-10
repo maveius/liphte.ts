@@ -1,5 +1,5 @@
-module factory {
-    import Renderable = html.Renderable;
+module liphte.factory {
+    import Renderable = liphte.html.Renderable;
 
     export abstract class RenderableFactory {
 

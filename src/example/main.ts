@@ -1,6 +1,4 @@
-///<reference path="../tag.ts"/>
-
-let T = liphte.tag;
+import T = liphte.tag;
 
 T.append('template');
 

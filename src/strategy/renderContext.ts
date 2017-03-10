@@ -1,4 +1,4 @@
-module strategy {
+module liphte.strategy {
     import JSONs = utils.JSONs;
     export class ExtractorContext {
 

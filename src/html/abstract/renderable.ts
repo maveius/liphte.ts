@@ -2,7 +2,7 @@
 ///<reference path="../../strategy/renderStrategy.ts"/>
 ///<reference path="../../strategy/renderContext.ts"/>
 
-module html {
+module liphte.html {
 
     import ExtractorContext = strategy.ExtractorContext;
     import ExtractorStrategy = strategy.RenderStrategy;

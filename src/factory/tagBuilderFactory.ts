@@ -3,10 +3,10 @@
 ///<reference path="../builder/selfClosingTagBuilder.ts"/>
 ///<reference path="../utils/utils.ts"/>
 
-module factory {
-    import TagBuilder = builder.TagBuilder;
-    import SelfClosingTagBuilder = builder.SelfClosingTagBuilder;
-    import PairedClosingTagBuilder = builder.PairedClosingTagBuilder;
+module liphte.factory {
+    import TagBuilder = liphte.builder.TagBuilder;
+    import SelfClosingTagBuilder = liphte.builder.SelfClosingTagBuilder;
+    import PairedClosingTagBuilder = liphte.builder.PairedClosingTagBuilder;
     import Arrays = utils.Arrays;
 
     export class TagBuilderFactory {

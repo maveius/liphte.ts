@@ -1,6 +1,6 @@
 ///<reference path="tagBuilder.ts"/>
 
-module builder {
+module liphte.builder {
     import Strings = utils.Strings;
     import RenderableFactory = factory.RenderableFactory;
 

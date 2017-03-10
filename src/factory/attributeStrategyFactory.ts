@@ -3,7 +3,7 @@
 ///<reference path="../strategy/attribute/complexAttributeRenderStrategy.ts"/>
 ///<reference path="../strategy/attribute/simpleAttributeRenderStrategy.ts"/>
 
-module factory {
+module liphte.factory {
 
     import ExtractorStrategy = strategy.RenderStrategy;
     import JSONs = utils.JSONs;

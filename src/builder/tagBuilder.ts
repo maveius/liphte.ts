@@ -4,8 +4,8 @@
 ///<reference path="../factory/attributeRenderableFactory.ts"/>
 ///<reference path="../factory/contentRenderableFactory.ts"/>
 
-module builder {
-    import Renderable = html.Renderable;
+module liphte.builder {
+    import Renderable = liphte.html.Renderable;
     import RenderableFactory = factory.RenderableFactory;
     import AttributeRenderableFactory = factory.AttributeRenderableFactory;
     import ContentRenderableFactory = factory.ContentRenderableFactory;

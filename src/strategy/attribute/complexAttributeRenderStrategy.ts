@@ -3,7 +3,7 @@
 ///<reference path="./simpleAttributeRenderStrategy.ts"/>
 ///<reference path="../../factory/attributeStrategyFactory.ts"/>
 
-module strategy {
+module liphte.strategy {
 
     import JSONs = utils.JSONs;
 

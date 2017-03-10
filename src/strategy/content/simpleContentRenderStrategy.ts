@@ -1,6 +1,6 @@
 ///<reference path="../renderStrategy.ts"/>
 
-module strategy {
+module liphte.strategy {
     export class SimpleContentRenderStrategy extends RenderStrategy {
 
         public extract(key): string {

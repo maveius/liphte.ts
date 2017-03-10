@@ -1,7 +1,7 @@
 module utils {
 
-    import Content = html.Content;
-    import Attribute = html.Attribute;
+    import Content = liphte.html.Content;
+    import Attribute = liphte.html.Attribute;
     export class Arrays {
 
         public static contains(array: any[], object: any) {
@@ -29,8 +29,10 @@ module utils {
 
         private static checkElements<T>(instance : any) : boolean {
 
+            let t : T;
+
             for (let element of instance) {
-                if(typeof element !== (typeof T)) {
+                if(typeof element !== (typeof t)) {
                     return false;
                 }
             }

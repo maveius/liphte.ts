@@ -1,4 +1,4 @@
-module html.abstract {
+module liphte.html.abstract {
     export abstract class Markup {
 
         protected tags: string[] = Object.getOwnPropertyNames(Markup.prototype);

@@ -1,7 +1,7 @@
-module factory {
-    import Renderable = html.Renderable;
+module liphte.factory {
+    import Renderable = liphte.html.Renderable;
     import TagUtils = utils.TagUtils;
-    import Content = html.Content;
+    import Content = liphte.html.Content;
     import Strings = utils.Strings;
 
     export class ContentRenderableFactory extends RenderableFactory{
