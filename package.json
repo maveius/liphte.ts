@@ -1,6 +1,6 @@
 {
   "name": "liphte.ts",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "It's library for building HTML / HTML5 from TypeScript or JavaScript",
   "main": "liphte.ts.min.js",
   "scripts": {
