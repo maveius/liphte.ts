@@ -1,3 +1,4 @@
+///<reference path="../tag.ts"/>
 import T = liphte.tag;
 
 T.append('template');

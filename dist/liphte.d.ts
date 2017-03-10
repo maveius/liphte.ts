@@ -264,4 +264,3 @@ declare module liphte.factory {
 declare module liphte {
     let tag: any;
 }
-import T = liphte.tag;
