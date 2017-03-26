@@ -10,6 +10,7 @@
     "outFile": "dist/liphte.js"
   },
   "exclude": [
-    "src/example"
+    "src/example",
+    "dist/liphte.d.ts"
   ]
 }

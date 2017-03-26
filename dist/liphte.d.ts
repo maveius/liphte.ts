@@ -1,153 +1,3 @@
-declare module utils {
-    class Arrays {
-        static contains(array: any[], object: any): boolean;
-        static identity: <Y>(type: new () => Y) => string;
-        static isArray<T>(instance: any): boolean;
-        private static checkElements<T>(instance);
-    }
-    class JSONs {
-        static isJSON(object: any): boolean;
-        static isSimple(object: any): boolean;
-        static isComplex(object: any): boolean;
-    }
-    class Strings {
-        static EMPTY: string;
-        static isString(object: any): boolean;
-    }
-    class TagUtils {
-        private static counter;
-        static isAttribute(object: any): boolean;
-        static isContent(object: any): boolean;
-    }
-}
-declare module strategy {
-    abstract class RenderStrategy {
-        protected factory: any;
-        protected strategy: any;
-        abstract extract(key: any): string;
-        protected selectFactory(factory: any): void;
-        protected appendExtractedElement(element: any, results: any): void;
-    }
-}
-declare module strategy {
-    class ExtractorContext {
-        private strategy;
-        constructor(strategy: RenderStrategy);
-        execute(key: any): string;
-    }
-}
-declare module html {
-    import ExtractorStrategy = strategy.RenderStrategy;
-    abstract class Renderable {
-        protected key: any;
-        constructor(key: any);
-        abstract render(): string;
-        protected execute(strategy: ExtractorStrategy): string;
-    }
-}
-declare module strategy {
-    class SimpleAttributeRenderStrategy extends RenderStrategy {
-        extract(key: any): string;
-        private parse(value);
-    }
-}
-declare module strategy {
-    class ComplexAttributeRenderStrategy extends RenderStrategy {
-        constructor();
-        extract(keys: any): string;
-    }
-}
-declare module factory {
-    import ExtractorStrategy = strategy.RenderStrategy;
-    class AttributeStrategyFactory {
-        static selectStrategy(key: any): ExtractorStrategy;
-    }
-}
-declare module html {
-    class Attribute extends Renderable {
-        constructor(key: any);
-        render(): string;
-    }
-}
-declare module strategy {
-    class ComplexContentRenderStrategy extends RenderStrategy {
-        constructor();
-        extract(keys: any): string;
-    }
-}
-declare module strategy {
-    class SimpleContentRenderStrategy extends RenderStrategy {
-        extract(key: any): string;
-    }
-}
-declare module factory {
-    import ExtractorStrategy = strategy.RenderStrategy;
-    class ContentStrategyFactory {
-        static selectStrategy(key: any): ExtractorStrategy;
-    }
-}
-declare module html {
-    class Content extends Renderable {
-        render(): string;
-    }
-}
-declare module factory {
-    import Renderable = html.Renderable;
-    abstract class RenderableFactory {
-        abstract createRenderable(key: any): Renderable;
-        abstract closeTagCharacter(): string;
-    }
-}
-declare module factory {
-    import Renderable = html.Renderable;
-    class AttributeRenderableFactory extends RenderableFactory {
-        createRenderable(key: any): Renderable;
-        closeTagCharacter(): string;
-    }
-}
-declare module factory {
-    import Renderable = html.Renderable;
-    class ContentRenderableFactory extends RenderableFactory {
-        createRenderable(key: any): Renderable;
-        closeTagCharacter(): string;
-    }
-}
-declare module builder {
-    import RenderableFactory = factory.RenderableFactory;
-    abstract class TagBuilder {
-        build(name: string, attributesAndContent: any): string;
-        protected open(name: string): string;
-        protected buildAttributes(attributesAndContent: any): string;
-        protected buildContent(attributesAndContent: any): string;
-        private buildPart(attributesAndContent, factory);
-        protected abstract endAttributes(factory: RenderableFactory): string;
-        protected abstract close(name: string): string;
-    }
-}
-declare module builder {
-    import RenderableFactory = factory.RenderableFactory;
-    class PairedClosingTagBuilder extends TagBuilder {
-        protected endAttributes(factory: RenderableFactory): string;
-        protected close(name: string): string;
-    }
-}
-declare module builder {
-    import RenderableFactory = factory.RenderableFactory;
-    class SelfClosingTagBuilder extends TagBuilder {
-        protected buildContent(attributesAndContent: any): string;
-        protected endAttributes(factory: RenderableFactory): string;
-        protected close(name: string): string;
-    }
-}
-declare module factory {
-    import TagBuilder = builder.TagBuilder;
-    class TagBuilderFactory {
-        private static selfClosingTags;
-        static createTagBuilder(tagName: string): TagBuilder;
-        private static isSelfClosingTag(tagName);
-        static appendSingleCloseTag(name: string): void;
-    }
-}
 declare module html.abstract {
     abstract class Markup {
         protected tags: string[];
@@ -259,6 +109,157 @@ declare module html.abstract {
         var(...attributesAndContent: any[]): void;
         video(...attributesAndContent: any[]): void;
         wbr(...attributesAndContent: any[]): void;
+    }
+}
+declare module utils {
+    class Arrays {
+        static contains(array: any[], object: any): boolean;
+        static identity: <Y>(type: new () => Y) => string;
+        static isArray<T>(instance: any): boolean;
+        private static checkElements<T>(instance);
+    }
+    class JSONs {
+        static isJSON(object: any): boolean;
+        static isSimple(object: any): boolean;
+        static isComplex(object: any): boolean;
+    }
+    class Strings {
+        static EMPTY: string;
+        static isString(object: any): boolean;
+    }
+    class TagUtils {
+        private static counter;
+        static isAttribute(object: any): boolean;
+        static isContent(object: any): boolean;
+    }
+}
+declare module strategy {
+    abstract class RenderStrategy {
+        protected factory: any;
+        protected strategy: any;
+        abstract extract(key: any): string;
+        protected selectFactory(factory: any): void;
+        protected appendExtractedElement(element: any, results: any): void;
+    }
+}
+declare module strategy {
+    class ExtractorContext {
+        private strategy;
+        constructor(strategy: RenderStrategy);
+        execute(key: any): string;
+    }
+}
+declare module html {
+    import ExtractorStrategy = strategy.RenderStrategy;
+    abstract class Renderable {
+        protected key: any;
+        constructor(key: any);
+        abstract render(): string;
+        protected execute(strategy: ExtractorStrategy): string;
+    }
+}
+declare module strategy {
+    class SimpleAttributeRenderStrategy extends RenderStrategy {
+        extract(key: any): string;
+        private getMappedAttribute(id, value);
+        private parse(value);
+    }
+}
+declare module strategy {
+    class ComplexAttributeRenderStrategy extends RenderStrategy {
+        constructor();
+        extract(keys: any): string;
+    }
+}
+declare module factory {
+    import ExtractorStrategy = strategy.RenderStrategy;
+    class AttributeStrategyFactory {
+        static selectStrategy(key: any): ExtractorStrategy;
+    }
+}
+declare module html {
+    class Attribute extends Renderable {
+        constructor(key: any);
+        render(): string;
+    }
+}
+declare module strategy {
+    class ComplexContentRenderStrategy extends RenderStrategy {
+        constructor();
+        extract(keys: any): string;
+    }
+}
+declare module strategy {
+    class SimpleContentRenderStrategy extends RenderStrategy {
+        extract(key: any): string;
+    }
+}
+declare module factory {
+    import ExtractorStrategy = strategy.RenderStrategy;
+    class ContentStrategyFactory {
+        static selectStrategy(key: any): ExtractorStrategy;
+    }
+}
+declare module html {
+    class Content extends Renderable {
+        render(): string;
+    }
+}
+declare module factory {
+    import Renderable = html.Renderable;
+    abstract class RenderableFactory {
+        abstract createRenderable(key: any): Renderable;
+        abstract closeTagCharacter(): string;
+    }
+}
+declare module factory {
+    import Renderable = html.Renderable;
+    class AttributeRenderableFactory extends RenderableFactory {
+        createRenderable(key: any): Renderable;
+        closeTagCharacter(): string;
+    }
+}
+declare module factory {
+    import Renderable = html.Renderable;
+    class ContentRenderableFactory extends RenderableFactory {
+        createRenderable(key: any): Renderable;
+        closeTagCharacter(): string;
+    }
+}
+declare module builder {
+    import RenderableFactory = factory.RenderableFactory;
+    abstract class TagBuilder {
+        build(name: string, attributesAndContent: any): string;
+        protected open(name: string): string;
+        protected buildAttributes(attributesAndContent: any): string;
+        protected buildContent(attributesAndContent: any): string;
+        private buildPart(attributesAndContent, factory);
+        protected abstract endAttributes(factory: RenderableFactory): string;
+        protected abstract close(name: string): string;
+    }
+}
+declare module builder {
+    import RenderableFactory = factory.RenderableFactory;
+    class PairedClosingTagBuilder extends TagBuilder {
+        protected endAttributes(factory: RenderableFactory): string;
+        protected close(name: string): string;
+    }
+}
+declare module builder {
+    import RenderableFactory = factory.RenderableFactory;
+    class SelfClosingTagBuilder extends TagBuilder {
+        protected buildContent(attributesAndContent: any): string;
+        protected endAttributes(factory: RenderableFactory): string;
+        protected close(name: string): string;
+    }
+}
+declare module factory {
+    import TagBuilder = builder.TagBuilder;
+    class TagBuilderFactory {
+        private static selfClosingTags;
+        static createTagBuilder(tagName: string): TagBuilder;
+        private static isSelfClosingTag(tagName);
+        static appendSingleCloseTag(name: string): void;
     }
 }
 declare module liphte {

@@ -7,6 +7,7 @@ T.append('template');
 console.log();
 console.log(
     T.ul(
+        {liphteAttributes: '{{attributes}}'},
         {title: "Ambasador"},
         [[{id: "test"}], [{href:"other"}]],
         [[{data: "data-attr"}, {name:"name"}]],

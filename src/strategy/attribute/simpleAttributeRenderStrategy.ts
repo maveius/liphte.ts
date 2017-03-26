@@ -7,9 +7,8 @@ module strategy {
             let tagAttributes: string[] = [];
 
             for (let id in key) {
-                //noinspection JSUnfilteredForInLoop
                 let value = key[id];
-                let attribute = (id + '="' + this.parse(value) + '"');
+                let attribute = this.getMappedAttribute(id, value);
                 tagAttributes.push(attribute);
             }
 
@@ -19,6 +18,13 @@ module strategy {
 
             return space + tagAttributes.join(" ");
 
+        }
+
+        private getMappedAttribute(id, value: any) {
+            if(id === 'liphteAttributes'){
+                return this.parse(value);
+            }
+            return (id + '="' + this.parse(value) + '"');
         }
 
         //noinspection JSMethodCanBeStatic

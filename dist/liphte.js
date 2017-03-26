@@ -1,8 +1,674 @@
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var html;
+(function (html) {
+    var abstract;
+    (function (abstract) {
+        var Markup = (function () {
+            function Markup() {
+                this.tags = Object.getOwnPropertyNames(Markup.prototype);
+            }
+            Markup.prototype.a = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.abbr = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.address = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.area = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.article = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.aside = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.audio = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.b = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.base = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.bdi = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.bdo = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.blockquote = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.body = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.br = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.button = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.canvas = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.caption = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.cite = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.code = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.col = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.colgroup = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.command = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.datalist = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.dd = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.del = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.details = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.dfn = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.div = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.dl = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.dt = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.em = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.embed = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.fieldset = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.figcaption = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.figure = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.footer = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.form = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.h1 = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.h2 = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.h3 = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.h4 = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.h5 = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.h6 = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.head = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.header = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.hgroup = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.hr = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.html = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.i = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.iframe = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.img = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.input = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.ins = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.kbd = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.keygen = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.label = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.legend = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.li = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.link = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.map = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.mark = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.menu = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.meta = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.meter = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.nav = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.noscript = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.object = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.ol = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.optgroup = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.option = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.output = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.p = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.param = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.pre = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.progress = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.q = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.rp = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.rt = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.ruby = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.s = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.samp = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.script = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.section = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.select = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.small = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.source = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.span = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.strong = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.style = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.sub = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.summary = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.sup = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.table = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.tbody = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.td = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.textarea = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.tfoot = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.th = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.thead = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.time = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.title = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.tr = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.track = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.u = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.ul = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.var = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.video = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            Markup.prototype.wbr = function () {
+                var attributesAndContent = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    attributesAndContent[_i] = arguments[_i];
+                }
+            };
+            return Markup;
+        }());
+        abstract.Markup = Markup;
+    })(abstract = html.abstract || (html.abstract = {}));
+})(html || (html = {}));
 var utils;
 (function (utils) {
     var Arrays = (function () {
@@ -32,11 +698,11 @@ var utils;
             }
             return true;
         };
-        Arrays.identity = function (type) {
-            return typeof (new type());
-        };
         return Arrays;
     }());
+    Arrays.identity = function (type) {
+        return typeof (new type());
+    };
     utils.Arrays = Arrays;
     var JSONs = (function () {
         function JSONs() {
@@ -61,9 +727,9 @@ var utils;
         Strings.isString = function (object) {
             return ((typeof object) === 'string');
         };
-        Strings.EMPTY = '';
         return Strings;
     }());
+    Strings.EMPTY = '';
     utils.Strings = Strings;
     var TagUtils = (function () {
         function TagUtils() {
@@ -82,9 +748,9 @@ var utils;
             var isString = Strings.isString(object);
             return isNotAttribute || isString;
         };
-        TagUtils.counter = 0;
         return TagUtils;
     }());
+    TagUtils.counter = 0;
     utils.TagUtils = TagUtils;
 })(utils || (utils = {}));
 var strategy;
@@ -138,20 +804,26 @@ var strategy;
     var SimpleAttributeRenderStrategy = (function (_super) {
         __extends(SimpleAttributeRenderStrategy, _super);
         function SimpleAttributeRenderStrategy() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         SimpleAttributeRenderStrategy.prototype.extract = function (key) {
             var space = '';
             var tagAttributes = [];
             for (var id in key) {
                 var value = key[id];
-                var attribute = (id + '="' + this.parse(value) + '"');
+                var attribute = this.getMappedAttribute(id, value);
                 tagAttributes.push(attribute);
             }
             if (tagAttributes.length > 0) {
                 space = ' ';
             }
             return space + tagAttributes.join(" ");
+        };
+        SimpleAttributeRenderStrategy.prototype.getMappedAttribute = function (id, value) {
+            if (id === 'liphteAttributes') {
+                return this.parse(value);
+            }
+            return (id + '="' + this.parse(value) + '"');
         };
         SimpleAttributeRenderStrategy.prototype.parse = function (value) {
             if (value instanceof Function) {
@@ -168,8 +840,9 @@ var strategy;
     var ComplexAttributeRenderStrategy = (function (_super) {
         __extends(ComplexAttributeRenderStrategy, _super);
         function ComplexAttributeRenderStrategy() {
-            _super.call(this);
-            this.selectFactory(factory.AttributeStrategyFactory);
+            var _this = _super.call(this) || this;
+            _this.selectFactory(factory.AttributeStrategyFactory);
+            return _this;
         }
         ComplexAttributeRenderStrategy.prototype.extract = function (keys) {
             var attributes = [];
@@ -209,7 +882,7 @@ var html;
     var Attribute = (function (_super) {
         __extends(Attribute, _super);
         function Attribute(key) {
-            _super.call(this, key);
+            return _super.call(this, key) || this;
         }
         Attribute.prototype.render = function () {
             var strategy = AttributeStrategyFactory.selectStrategy(this.key);
@@ -224,8 +897,9 @@ var strategy;
     var ComplexContentRenderStrategy = (function (_super) {
         __extends(ComplexContentRenderStrategy, _super);
         function ComplexContentRenderStrategy() {
-            _super.call(this);
-            this.selectFactory(factory.ContentStrategyFactory);
+            var _this = _super.call(this) || this;
+            _this.selectFactory(factory.ContentStrategyFactory);
+            return _this;
         }
         ComplexContentRenderStrategy.prototype.extract = function (keys) {
             var content = [];
@@ -244,7 +918,7 @@ var strategy;
     var SimpleContentRenderStrategy = (function (_super) {
         __extends(SimpleContentRenderStrategy, _super);
         function SimpleContentRenderStrategy() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         SimpleContentRenderStrategy.prototype.extract = function (key) {
             return key;
@@ -276,7 +950,7 @@ var html;
     var Content = (function (_super) {
         __extends(Content, _super);
         function Content() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         Content.prototype.render = function () {
             var strategy = ContentStrategyFactory.selectStrategy(this.key);
@@ -302,7 +976,7 @@ var factory;
     var AttributeRenderableFactory = (function (_super) {
         __extends(AttributeRenderableFactory, _super);
         function AttributeRenderableFactory() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         AttributeRenderableFactory.prototype.createRenderable = function (key) {
             if (TagUtils.isAttribute(key)) {
@@ -325,7 +999,7 @@ var factory;
     var ContentRenderableFactory = (function (_super) {
         __extends(ContentRenderableFactory, _super);
         function ContentRenderableFactory() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         ContentRenderableFactory.prototype.createRenderable = function (key) {
             if (TagUtils.isContent(key)) {
@@ -383,7 +1057,7 @@ var builder;
     var PairedClosingTagBuilder = (function (_super) {
         __extends(PairedClosingTagBuilder, _super);
         function PairedClosingTagBuilder() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         PairedClosingTagBuilder.prototype.endAttributes = function (factory) {
             return factory.closeTagCharacter();
@@ -401,7 +1075,7 @@ var builder;
     var SelfClosingTagBuilder = (function (_super) {
         __extends(SelfClosingTagBuilder, _super);
         function SelfClosingTagBuilder() {
-            _super.apply(this, arguments);
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         SelfClosingTagBuilder.prototype.buildContent = function (attributesAndContent) {
             return Strings.EMPTY;
@@ -436,674 +1110,13 @@ var factory;
         TagBuilderFactory.appendSingleCloseTag = function (name) {
             this.selfClosingTags.push(name);
         };
-        TagBuilderFactory.selfClosingTags = [
-            'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source'
-        ];
         return TagBuilderFactory;
     }());
+    TagBuilderFactory.selfClosingTags = [
+        'area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source'
+    ];
     factory.TagBuilderFactory = TagBuilderFactory;
 })(factory || (factory = {}));
-var html;
-(function (html) {
-    var abstract;
-    (function (abstract) {
-        var Markup = (function () {
-            function Markup() {
-                this.tags = Object.getOwnPropertyNames(Markup.prototype);
-            }
-            Markup.prototype.a = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.abbr = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.address = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.area = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.article = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.aside = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.audio = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.b = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.base = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.bdi = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.bdo = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.blockquote = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.body = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.br = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.button = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.canvas = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.caption = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.cite = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.code = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.col = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.colgroup = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.command = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.datalist = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.dd = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.del = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.details = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.dfn = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.div = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.dl = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.dt = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.em = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.embed = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.fieldset = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.figcaption = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.figure = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.footer = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.form = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.h1 = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.h2 = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.h3 = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.h4 = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.h5 = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.h6 = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.head = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.header = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.hgroup = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.hr = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.html = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.i = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.iframe = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.img = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.input = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.ins = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.kbd = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.keygen = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.label = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.legend = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.li = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.link = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.map = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.mark = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.menu = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.meta = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.meter = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.nav = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.noscript = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.object = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.ol = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.optgroup = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.option = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.output = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.p = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.param = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.pre = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.progress = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.q = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.rp = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.rt = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.ruby = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.s = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.samp = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.script = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.section = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.select = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.small = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.source = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.span = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.strong = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.style = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.sub = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.summary = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.sup = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.table = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.tbody = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.td = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.textarea = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.tfoot = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.th = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.thead = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.time = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.title = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.tr = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.track = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.u = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.ul = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.var = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.video = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            Markup.prototype.wbr = function () {
-                var attributesAndContent = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
-                }
-            };
-            return Markup;
-        }());
-        abstract.Markup = Markup;
-    })(abstract = html.abstract || (html.abstract = {}));
-})(html || (html = {}));
 var liphte;
 (function (liphte) {
     var Mark = html.abstract.Markup;
@@ -1111,12 +1124,14 @@ var liphte;
     var Tag = (function (_super) {
         __extends(Tag, _super);
         function Tag() {
+            var _this = this;
             if (Tag.instance) {
                 throw new Error("Error: Instantiation failed: Use SingletonClass.getInstance() instead of new.");
             }
-            _super.call(this);
-            this.assignImplementation();
-            Tag.instance = this;
+            _this = _super.call(this) || this;
+            _this.assignImplementation();
+            Tag.instance = _this;
+            return _this;
         }
         Tag.prototype.assignImplementation = function () {
             this.appendAll(this.tags);
@@ -1135,7 +1150,7 @@ var liphte;
             this[tagName] = function () {
                 var attributesAndContent = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
-                    attributesAndContent[_i - 0] = arguments[_i];
+                    attributesAndContent[_i] = arguments[_i];
                 }
                 return _this.render(tagName, attributesAndContent);
             };
@@ -1147,9 +1162,9 @@ var liphte;
         Tag.getInstance = function () {
             return Tag.instance;
         };
-        Tag.instance = new Tag();
         return Tag;
     }(Mark));
+    Tag.instance = new Tag();
     liphte.tag = Tag.getInstance();
 })(liphte || (liphte = {}));
 //# sourceMappingURL=liphte.js.map

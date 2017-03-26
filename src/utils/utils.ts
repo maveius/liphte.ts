@@ -79,6 +79,7 @@ module utils {
         public static isContent(object : any) : boolean {
 
             if(JSONs.isComplex(object)) {
+                //noinspection LoopStatementThatDoesntLoopJS
                 for(let element of object) {
                     return this.isContent(element);
                 }
